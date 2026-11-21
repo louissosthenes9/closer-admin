@@ -12,14 +12,18 @@ class DatabaseSeeder extends Seeder
 
     /**
      * Seed the application's database.
+     *
+     * Does not use factories/Faker so it also works in production (--no-dev).
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::updateOrCreate(
+            ['email' => env('ADMIN_EMAIL', 'admin@example.com')],
+            [
+                'name' => 'Admin',
+                'password' => env('ADMIN_PASSWORD', 'password'),
+                'is_admin' => true,
+            ],
+        );
     }
 }
