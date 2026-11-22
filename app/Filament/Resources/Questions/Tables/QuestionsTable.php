@@ -9,6 +9,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
@@ -38,6 +39,9 @@ class QuestionsTable
                 TernaryFilter::make('active'),
                 TernaryFilter::make('sensitive'),
             ])
+            ->filtersLayout(FiltersLayout::AboveContent)
+            ->filtersFormColumns(['md' => 3, 'xl' => 5])
+            ->deferFilters(false)
             ->recordActions([EditAction::make()])
             ->toolbarActions([
                 BulkActionGroup::make([
